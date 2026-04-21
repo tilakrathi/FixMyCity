@@ -2,7 +2,6 @@
 
 FixMyCity is a modern, responsive platform that enables citizens to seamlessly report municipal issues (e.g., potholes, streetlight outages, illegal dumping). Unlike traditional civic apps, FixMyCity leverages an **AI Engine** to instantly classify reports and estimate priority, routing the issue exactly where it needs to go on an interactive map.
 
-![FixMyCity Intro](/public/logo.svg)
 
 ## Features
 
