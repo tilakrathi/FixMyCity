@@ -3,6 +3,9 @@
 A civic issue reporting platform built with React and Vite. Citizens can report problems like potholes, broken streetlights, garbage overflow, and other municipal issues. The app classifies complaints automatically using a keyword-based AI engine and assigns priority levels, so officials can act on the most urgent issues first.
 
 ---
+## Live Demo
+
+https://fixmycity-report-civic-issues.netlify.app/
 
 ## What it does
 
