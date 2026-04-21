@@ -1,123 +1,88 @@
-# 🏙️ FixMyCity — AI-Powered Civic Issue Reporting Platform
+# FixMyCity
 
-FixMyCity is a modern, responsive web application that empowers citizens to report municipal issues such as potholes, garbage overflow, streetlight outages, water leakage, and traffic problems. It uses a built-in **AI Engine** to automatically classify and prioritize complaints, streamlining the process for both citizens and municipal officials.
-
----
-
-## ✨ Features
-
-### 🧑‍💻 Citizen Module
-- **Report Complaints** — Submit civic issues with descriptions, image uploads, and location tagging
-- **AI Auto-Categorization** — The built-in heuristic AI engine reads your description and automatically suggests a category (Pothole, Garbage, Water Leakage, Streetlight, Traffic Issue) and priority level (High / Medium / Low)
-- **AI Image Analysis** — Simulated image severity detection for uploaded photos
-- **Citizen Dashboard** — View and track all your submitted complaints with status updates
-- **Track Complaints** — Browse all reported complaints in one place
-
-### 🏛️ Official / Admin Module
-- **Official Dashboard** — Municipal officials can view, manage, and update the status of all incoming complaints
-- **Status Management** — Update complaint status (Pending → In Progress → Resolved)
-- **Priority Filtering** — Sort and filter complaints by priority and category
-
-### 🎨 Design & UX
-- **Glassmorphism UI** — Modern glass-card components with gradient buttons and smooth animations
-- **Responsive Design** — Fully responsive layout that works on desktop, tablet, and mobile
-- **PWA Support** — Installable as a Progressive Web App on mobile devices ("Add to Home Screen")
-- **Custom Logo & Branding** — FixMyCity branded logo and assets throughout
+A civic issue reporting platform built with React and Vite. Citizens can report problems like potholes, broken streetlights, garbage overflow, and other municipal issues. The app classifies complaints automatically using a keyword-based AI engine and assigns priority levels, so officials can act on the most urgent issues first.
 
 ---
 
-## 🛠️ Tech Stack
+## What it does
 
-| Layer | Technology |
-|-------|-----------|
-| **Framework** | React 18 + Vite |
-| **Routing** | React Router DOM v6 |
-| **Styling** | TailwindCSS 3 + Custom CSS |
-| **UI Libraries** | MUI (Material UI) + FontAwesome + Lucide Icons |
-| **AI Engine** | Custom heuristic keyword-based classifier (`src/utils/AIEngine.js`) |
-| **Data Layer** | LocalForage (IndexedDB) — mimics a backend database locally |
-| **Auth** | LocalStorage-based auth stub (Firebase-compatible interface) |
-| **Image Upload** | react-images-uploading |
-| **Notifications** | React Toastify |
-| **PWA** | vite-plugin-pwa + Workbox |
+**For Citizens:**
+- Report civic issues with a description, photo upload, and location
+- The AI engine reads the description and suggests a category and priority automatically
+- Dashboard to track the status of submitted complaints
+- Browse all reported complaints in one place
+
+**For Officials:**
+- Admin dashboard to view and manage all incoming complaints
+- Update complaint status (Pending, In Progress, Resolved)
+- Filter by priority and category
+
+**General:**
+- Glassmorphism-based UI with responsive layout
+- Works as a PWA — installable on mobile via "Add to Home Screen"
+- All data stored locally using LocalForage (IndexedDB), no backend server needed to run it
 
 ---
 
-## 📁 Project Structure
+## Tech Stack
+
+| | |
+|---|---|
+| Frontend | React 18 + Vite |
+| Routing | React Router DOM v6 |
+| Styling | TailwindCSS 3 + Custom CSS |
+| UI Components | MUI, FontAwesome, Lucide Icons |
+| AI Engine | Custom keyword classifier (see `src/utils/AIEngine.js`) |
+| Data | LocalForage (IndexedDB wrapper) |
+| Auth | LocalStorage-based stub with Firebase-compatible interface |
+| PWA | vite-plugin-pwa + Workbox |
+
+---
+
+## Project Structure
 
 ```
 FixMyCity/
-├── public/                     # Static public assets
-├── doc/                        # Documentation
+├── public/
+├── doc/
 ├── src/
-│   ├── assets/                 # Images (logo, hero image)
-│   ├── components/             # Reusable UI components
-│   │   ├── ui/                 # Base UI components (GlassCard, Badges, Breadcrumb, etc.)
-│   │   ├── Navbar.jsx          # Navigation bar
-│   │   ├── Footer.jsx          # Footer
-│   │   ├── FixMyCityLogo.jsx   # SVG logo component
-│   │   ├── ComplaintsCard.jsx  # Complaint display card
-│   │   ├── ComplaintDetailModal.jsx  # Detailed complaint view
-│   │   ├── CityScene.jsx      # City illustration animation
-│   │   ├── SpinnerModal.jsx    # Loading spinner
-│   │   └── ...
-│   ├── pages/                  # Application pages
-│   │   ├── HomePage.jsx        # Landing page
-│   │   ├── About.jsx           # About page
-│   │   ├── CitizenLogin.jsx    # Citizen login/register
-│   │   ├── OfficialLogin.jsx   # Official login
-│   │   ├── CitizenDashboard.jsx    # Citizen complaint dashboard
-│   │   ├── OfficialDashboard.jsx   # Admin complaint management
-│   │   └── ReportComplaint.jsx     # Complaint submission form
-│   ├── utils/                  # Utility modules
-│   │   ├── AIEngine.js         # AI classification engine
-│   │   ├── Firebase.js         # Auth stub (LocalStorage-based)
-│   │   ├── FirebaseFunctions.js # Data CRUD operations (LocalForage)
-│   │   ├── MiscFunctions.js    # Helper functions
-│   │   ├── cn.js               # Class name utility
-│   │   └── enums.js            # Constants and enums
-│   ├── main.jsx                # App entry point with routes
-│   └── index.css               # Global styles
-├── index.html                  # HTML entry point
-├── package.json                # Dependencies and scripts
-├── vite.config.js              # Vite + PWA configuration
-├── tailwind.config.js          # TailwindCSS configuration
-├── postcss.config.js           # PostCSS configuration
-└── .gitignore                  # Git ignore rules
+│   ├── assets/              # Logo, hero image
+│   ├── components/          # Navbar, Footer, Cards, Modals, etc.
+│   │   └── ui/              # Base components (GlassCard, Badges, Breadcrumb)
+│   ├── pages/               # All route pages
+│   │   ├── HomePage.jsx
+│   │   ├── About.jsx
+│   │   ├── CitizenLogin.jsx
+│   │   ├── OfficialLogin.jsx
+│   │   ├── CitizenDashboard.jsx
+│   │   ├── OfficialDashboard.jsx
+│   │   └── ReportComplaint.jsx
+│   ├── utils/               # AI engine, data functions, helpers
+│   ├── main.jsx             # Entry point and routes
+│   └── index.css            # Global styles
+├── index.html
+├── package.json
+├── vite.config.js
+├── tailwind.config.js
+└── postcss.config.js
 ```
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
-### Prerequisites
-- [Node.js](https://nodejs.org/) (v16 or higher)
-- npm (comes with Node.js)
+Make sure you have Node.js (v16+) installed.
 
-### Installation
+```bash
+git clone https://github.com/tilakrathi/FixMyCity.git
+cd FixMyCity
+npm install --legacy-peer-deps
+npm run dev
+```
 
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/tilakrathi/FixMyCity.git
-   cd FixMyCity
-   ```
+Open `http://localhost:5173` in your browser.
 
-2. **Install dependencies**
-   ```bash
-   npm install --legacy-peer-deps
-   ```
-
-3. **Run the development server**
-   ```bash
-   npm run dev
-   ```
-
-4. **Open in browser**
-   ```
-   http://localhost:5173
-   ```
-
-### Build for Production
+To build for production:
 
 ```bash
 npm run build
@@ -126,68 +91,39 @@ npm run preview
 
 ---
 
-## 📱 Routes
+## Routes
 
-| Route | Page | Description |
-|-------|------|-------------|
-| `/` | HomePage | Landing page with hero section and city animation |
-| `/about` | About | About the platform |
-| `/citizen-login` | CitizenLogin | Citizen login / registration |
-| `/official-login` | OfficialLogin | Municipal official login |
-| `/citizen-dashboard` | CitizenDashboard | View and track submitted complaints |
-| `/official-dashboard` | OfficialDashboard | Admin panel to manage all complaints |
-| `/report` | ReportComplaint | Submit a new civic complaint |
-| `/track-complaints` | ReportedComplaints | Browse all reported complaints |
-
----
-
-## 🤖 AI Engine
-
-The AI Engine (`src/utils/AIEngine.js`) provides three capabilities:
-
-1. **Issue Classification** — Analyzes complaint descriptions using keyword matching to categorize into: Pothole, Garbage, Water Leakage, Streetlight, Traffic Issue, or Others
-2. **Priority Assignment** — Automatically assigns High, Medium, or Low priority based on issue severity keywords
-3. **Image Analysis** — Simulated AI-based severity detection for uploaded images
+| Path | Page |
+|------|------|
+| `/` | Home |
+| `/about` | About |
+| `/citizen-login` | Citizen login and registration |
+| `/official-login` | Official login |
+| `/citizen-dashboard` | Citizen complaint dashboard |
+| `/official-dashboard` | Admin complaint management |
+| `/report` | Submit a new complaint |
+| `/track-complaints` | View all reported complaints |
 
 ---
 
-## 🗂️ Data Layer
+## How the AI Engine works
 
-FixMyCity uses **LocalForage** (IndexedDB wrapper) as its data layer, providing persistent local storage that mimics a backend database. The data functions in `src/utils/FirebaseFunctions.js` follow a Firebase-compatible interface, making it easy to switch to a real Firebase backend by simply updating the function implementations.
-
----
-
-## 📦 Deployment
-
-### Vercel (Recommended)
-1. Connect your GitHub repository to [Vercel](https://vercel.com)
-2. Vercel auto-detects the Vite framework
-3. Build command: `npm run build`
-4. Output directory: `dist`
-
-### Netlify
-1. Connect your GitHub repository to [Netlify](https://netlify.com)
-2. Build command: `npm run build`
-3. Publish directory: `dist`
+The classifier in `src/utils/AIEngine.js` matches keywords from the complaint description to predefined categories — Pothole, Garbage, Water Leakage, Streetlight, or Traffic Issue. It also assigns a priority (High, Medium, Low) based on severity keywords. If nothing matches, it defaults to "Others" with Low priority. There's also a simulated image analysis function that mimics AI-based severity detection.
 
 ---
 
-## 🔄 Switching to Firebase Backend
+## Data Layer
 
-The current setup uses LocalForage for local data persistence. To switch to a production Firebase backend:
-
-1. Add your Firebase config to `src/utils/Firebase.js`
-2. Update `src/utils/FirebaseFunctions.js` to use Firestore's `onSnapshot`, `addDoc`, `updateDoc` etc.
-3. No UI changes needed — the interface layer is already abstracted
+Everything runs on LocalForage (an IndexedDB wrapper). The functions in `src/utils/FirebaseFunctions.js` follow a Firebase-like interface, so switching to a real Firebase backend later just means swapping the function bodies — no UI changes needed.
 
 ---
 
-## 👤 Author
+## Deployment
 
-**Tilak Rathi**
+Works out of the box on Vercel or Netlify. Connect your GitHub repo, set the build command to `npm run build`, and the output directory to `dist`.
 
 ---
 
-## 📄 License
+## Author
 
-This project is open source and available for educational and personal use.
+Tilak Rathi
