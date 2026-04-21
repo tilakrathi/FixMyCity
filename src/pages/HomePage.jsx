@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import RegisterAccount from "../components/RegisterAccount";
 import { auth } from "../utils/Firebase";
 import { isOfficial } from "../utils/FirebaseFunctions";
-import Navbar from "/src/components/Navbar";
+import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import demoHero from "../assets/demo-hero.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

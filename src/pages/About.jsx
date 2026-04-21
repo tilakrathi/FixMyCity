@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import Breadcrumb from '../components/Breadcrumb';
+import Breadcrumb from '../components/ui/Breadcrumb';
 
 const About = () => {
   const navigate = useNavigate();

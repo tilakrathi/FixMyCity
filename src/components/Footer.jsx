@@ -43,12 +43,6 @@ const Footer = () => {
                 Report Issue
               </Link>
 
-              <Link
-                to="/track-complaints"
-                className="text-gray-500 hover:text-gray-300 transition-colors"
-              >
-                View Issues
-              </Link>
 
               <Link
                 to="/about"

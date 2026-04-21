@@ -235,3 +235,7 @@ export const markAsRejected = async (complaintID) => {
     await localforage.setItem("complaints", complaints);
   }
 };
+
+export const getComplaints = async () => {
+  return [];
+};

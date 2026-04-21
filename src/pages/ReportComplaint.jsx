@@ -12,7 +12,7 @@ import SpinnerModal from "../components/SpinnerModal";
 import { auth, storage } from "../utils/Firebase";
 import { createComplaint, isOfficial } from "../utils/FirebaseFunctions";
 import { uploadBytesResumable, getDownloadURL, ref } from "firebase/storage";
-import Breadcrumb from "../components/Breadcrumb";
+import Breadcrumb from "../components/ui/Breadcrumb";
 import { identifyLocation } from "../utils/MiscFunctions";
 import { Statuses } from "../utils/enums";
 import { GlassCard } from "../components/ui/GlassCard";

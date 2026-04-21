@@ -9,7 +9,7 @@ import SpinnerModal from "../components/SpinnerModal";
 import Footer from "../components/Footer";
 import { auth } from "../utils/Firebase";
 import { fetchComplaints, isOfficial } from "../utils/FirebaseFunctions";
-import Breadcrumb from "../components/Breadcrumb";
+import Breadcrumb from "../components/ui/Breadcrumb";
 import { Statuses, statusColors } from "../utils/enums";
 
 const OfficialDashboard = () => {

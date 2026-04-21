@@ -1,58 +1,35 @@
-import {
-  faEdit,
-  faMobileScreen,
-  faSignOut,
-  faTrafficLight,
-} from "@fortawesome/free-solid-svg-icons";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
-import DashboardLinkButton from "../components/DashboardLinkButton";
 import Navbar from "../components/Navbar";
-import ReportedComplaints from "../components/ReportedComplaints";
 import SpinnerModal from "../components/SpinnerModal";
 import { auth } from "../utils/Firebase";
-import { fetchComplaintsByUser, isOfficial } from "../utils/FirebaseFunctions";
-import { statusColors } from "../utils/enums";
-import Breadcrumb from "../components/Breadcrumb";
+import { getComplaints, isOfficial } from "../utils/FirebaseFunctions";
 
 const CitizenDashboard = () => {
   const [deferredPrompt, setDeferredPrompt] = useState(null);
   const [SpinnerVisible, setSpinnerVisible] = useState(false);
   const navigate = useNavigate();
   const [params] = useSearchParams();
-  const user = auth.currentUser;
+
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [complaints, setComplaints] = useState([]);
 
   useEffect(() => {
-    setSpinnerVisible(true);
-    const unsubscribeAuth = auth.onAuthStateChanged(async (user) => {
-      if (!user) {
-        setSpinnerVisible(false);
-        navigate("/citizen-login");
-        return;
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        const data = await getComplaints();
+        setComplaints(data || []);
+      } catch (error) {
+        console.error(error);
+        setComplaints([]);
+      } finally {
+        setLoading(false);
       }
-
-      const official = await isOfficial(user.uid);
-      if (official) {
-        setSpinnerVisible(false);
-        navigate("/official-dashboard");
-      } else {
-        setSpinnerVisible(false);
-        if (params.get("newUser")) {
-          toast.success("Registration successful, Welcome to citizen dashboard!", {
-            icon: "👋",
-          });
-        }
-      }
-    });
-    window.addEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
-    return () => {
-      window.removeEventListener(
-        "beforeinstallprompt",
-        handleBeforeInstallPrompt
-      );
-      unsubscribeAuth();
     };
+    fetchData();
   }, []);
 
   const handleBeforeInstallPrompt = (event) => {
@@ -68,19 +45,15 @@ const CitizenDashboard = () => {
       });
     }
   };
+
   const handleLogout = () => {
     auth.signOut();
     navigate("/");
   };
 
-  if (!user) {
-    return <div className="p-5 w-full text-center mt-20 text-gray-500">Loading dashboard...</div>;
-  }
-
   return (
-    <>
+    <div className="min-h-screen bg-gray-50 px-6 py-8">
       <SpinnerModal visible={SpinnerVisible} />
-
       <Navbar />
       <ToastContainer
         position="bottom-center"
@@ -94,49 +67,57 @@ const CitizenDashboard = () => {
         pauseOnHover
         theme="light"
       />
-      <div className="lg:mt-10 my-8 lg:mx-20 flex flex-col items-center lg:items-start text-center lg:text-left w-full lg:w-auto px-5 lg:px-0">
-        <Breadcrumb />
-        <button onClick={() => navigate(-1)} className="text-sm text-gray-600 hover:text-gray-900 mb-4">← Back</button>
-        <h2 className="leading-normal font-bold text-xl lg:text-[2rem] text-gray-800">
-          My Reports
-        </h2>
-        <p className="text-sm text-gray-500 mt-2">
-          Help improve your area by reporting problems around you.
-        </p>
-      </div>
-      <div className="flex flex-col lg:flex-row lg:gap-10 mx-5 lg:mx-20 pb-10">
-        <div className="flex flex-col gap-2 w-full lg:w-1/4 shrink-0">
-          <h3 className="font-bold text-gray-700 text-lg mb-4">Quick Actions</h3>
-          <DashboardLinkButton
-            icon={faEdit}
-            name={"Report a City Issue"}
-            link={"/report"}
-          />
-          <DashboardLinkButton
-            icon={faTrafficLight}
-            name={"Track Your Reports"}
-            link={"/track-complaints"}
-            className={"lg:hidden"}
-          />
-          <DashboardLinkButton
-            icon={faMobileScreen}
-            name={"Install as an app (Mobile)"}
-            onClick={handleInstall}
-            className={"lg:hidden"}
-          />
-          <DashboardLinkButton
-            icon={faSignOut}
-            name={"Logout"}
-            onClick={handleLogout}
-            className={"lg:hidden"}
-          />
+
+      <div className="max-w-5xl mx-auto mt-8">
+        {/* Header */}
+        <div className="flex justify-between items-center mb-6">
+          <h1 className="text-2xl font-semibold text-gray-800">
+            Your Reported Issues
+          </h1>
         </div>
-        
-        <div className="w-full lg:flex-1 mt-6 lg:mt-0">
-          <ReportedComplaints />
-        </div>
+
+        {/* Empty State */}
+        {loading ? (
+          <p className="text-gray-500">Loading...</p>
+        ) : complaints.length === 0 ? (
+          <div className="bg-white border border-gray-200 rounded-xl p-10 text-center shadow-sm">
+            <p className="text-gray-500 text-lg mb-4">
+              No issues reported yet
+            </p>
+
+            <button
+              onClick={() => navigate("/report")}
+              className="px-5 py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
+            >
+              Report New Issue
+            </button>
+          </div>
+        ) : (
+          /* Complaint Cards */
+          <div className="grid gap-4">
+            {complaints.map((item) => (
+              <div
+                key={item.id}
+                className="bg-white border border-gray-200 rounded-lg p-5 hover:shadow-md transition"
+              >
+                <h2 className="font-semibold text-gray-800 text-lg">
+                  {item.title}
+                </h2>
+
+                <p className="text-gray-500 text-sm mt-1">
+                  {item.description}
+                </p>
+
+                <div className="flex justify-between mt-3 text-sm text-gray-400">
+                  <span>{item.category}</span>
+                  <span>{item.status}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
-    </>
+    </div>
   );
 };
 
