@@ -121,9 +121,12 @@ Everything runs on LocalForage (an IndexedDB wrapper). The functions in `src/uti
 
 ---
 
-## Deployment
 
-Works out of the box on Vercel or Netlify. Connect your GitHub repo, set the build command to `npm run build`, and the output directory to `dist`.
+## Sample Output Images
+
+<img width="1890" height="909" alt="Screenshot 2026-03-29 193848" src="https://github.com/user-attachments/assets/e39e720c-4f80-4da6-95d7-354a7b6f600a" />
+<img width="1881" height="894" alt="Screenshot 2026-03-29 195051" src="https://github.com/user-attachments/assets/e5b6950b-9beb-4058-bb57-899446d8aad1" />
+
 
 ---
 
