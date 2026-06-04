@@ -131,7 +131,7 @@ Everything runs on LocalForage (an IndexedDB wrapper). The functions in `src/uti
 <img width="1881" height="911" alt="Screenshot 2026-03-29 194944" src="https://github.com/user-attachments/assets/97d08e84-f512-41d1-b47c-bdafdbfd9557" />
 <img width="1874" height="904" alt="Screenshot 2026-03-29 194958" src="https://github.com/user-attachments/assets/5830e80c-bfa7-42d8-b2da-2d7a1d4d61bc" />
 <img width="1881" height="894" alt="Screenshot 2026-03-29 195051" src="https://github.com/user-attachments/assets/931f541d-aea8-4c9d-8dec-c342138dcc31" />
-<img width="758" height="839" alt="Screenshot 2026-03-29 195118" src="https://github.com/user-attachments/assets/228c542b-d89a-4c1a-80fe-5d6d9535661f" />
+<img width="758" height="758" alt="Screenshot 2026-03-29 195118" src="https://github.com/user-attachments/assets/228c542b-d89a-4c1a-80fe-5d6d9535661f" />
 
 ---
 
